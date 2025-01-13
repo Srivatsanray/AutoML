@@ -9,7 +9,7 @@ from ingestion.dev_datasets import DecathlonDataset, extract_metadata
 from scoring.score import get_solution, decathlon_scorer
 
 dataset = "crypto"  # Replace with the desired dataset name
-data_path = r"D:/Train Data/dev_public"
+data_path = r"D:/Train Data/dev_public" # Replace with the path of train data 
 
 # Load the training and testing datasets using DecathlonDataset
 train_dataset = DecathlonDataset(dataset, data_path, 'train')
