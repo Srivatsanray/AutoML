@@ -16,14 +16,14 @@ DESCRIPTION = """This is the scoring program for the AutoML Decathlon. It takes 
 # Can be: NOTSET, DEBUG, INFO, WARNING, ERROR, CRITICAL
 verbosity_level = "INFO"
 
-from libscores import read_array, mkdir, ls, mvmean, tiedrank, _HERE, get_logger
+from scoring.libscores import read_array, mkdir, ls, mvmean, tiedrank, _HERE, get_logger
 from os.path import join
 from sys import argv
 from sklearn.metrics import auc
 import argparse
 import base64
 import datetime
-import decathlon_metrics
+import scoring.decathlon_metrics 
 import matplotlib
 
 matplotlib.use("Agg")  # Solve the Tkinter display issue
@@ -41,8 +41,8 @@ import sys
 
 score_dir = os.path.dirname(os.path.abspath(__file__))
 # sys.path.insert(0, os.path.join(score_dir, "..", "ingestion"))
-from dev_datasets import DecathlonDataset, OHE
-from fsd50kutils.audio_dataset import _collate_fn_eval
+from scoring.dev_datasets import DecathlonDataset, OHE
+from scoring.fsd50kutils.audio_dataset import _collate_fn_eval
 from torch.utils.data import Dataset, DataLoader
 
 
@@ -67,30 +67,30 @@ def decathlon_scorer(solution, prediction, dataset_name):
         "ember",
     ]:
         # Report 0-1 error
-        score = decathlon_metrics.zero_one_error(solution, prediction)
+        score = scoring.decathlon_metrics.zero_one_error(solution, prediction)
     elif dataset_name == "cosmic":
         # Report false negative rate
-        score = decathlon_metrics.inv_auroc_score(
+        score = scoring.decathlon_metrics.inv_auroc_score(
             solution.reshape(-1), prediction.reshape(-1)
         )
     elif dataset_name == "deepsea":
         # Report 1 - AUROC
-        score = decathlon_metrics.inv_auroc_score(solution, prediction)
+        score = scoring.decathlon_metrics.inv_auroc_score(solution, prediction)
     elif dataset_name == "ecg":
         # Report 1 - F1 score
-        score = decathlon_metrics.inv_f1_score(solution, prediction)
+        score = scoring.decathlon_metrics.inv_f1_score(solution, prediction)
     elif dataset_name == "fsd50k":
         # Report 1 - MAP
-        score = decathlon_metrics.inv_map_score(solution, prediction)
+        score = scoring.decathlon_metrics.inv_map_score(solution, prediction)
     elif dataset_name in ["navierstokes", "crypto"]:
         # Report L2 relative error
-        score = decathlon_metrics.l2_relative_error(
+        score = scoring.decathlon_metrics.l2_relative_error(
             solution.reshape(prediction.shape[0], -1),
             prediction.reshape(prediction.shape[0], -1),
         )
     elif dataset_name == "nottingham":
         # Report negative log likelihood
-        score = decathlon_metrics.nll_score(solution, prediction)
+        score = scoring.decathlon_metrics.nll_score(solution, prediction)
     else:
         raise NotImplementedError
     return score

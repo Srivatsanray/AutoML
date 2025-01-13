@@ -667,13 +667,13 @@ def get_xformer_dataloader(dataset, test = True):
                                   shuffle = True, 
                                     drop_last = True,
                                     collate_fn = dataset.collate_fn,
-                                  # num_workers = os.cpu_count()
+                                    # num_workers = os.cpu_count()
                                )
     else:
         dataloader = DataLoader(dataset, 
                                 batch_size = dataset.required_batch_size or 32, 
                                     collate_fn = dataset.collate_fn,
-                                  # num_workers = os.cpu_count()
+                                    # num_workers = os.cpu_count()
                                )
 
     return dataloader
@@ -713,7 +713,7 @@ def fit_xformer(model, params, train_dataloader, val_dataloader = None, ):
                          enable_progress_bar = LOCAL,
                     max_steps = params['steps'],
                      accelerator = 'auto',
-                     precision = 16,
+                     precision="16-mixed",
                          limit_val_batches = 1.0 if VALIDATION else 0.0,
                     # limit_val_batches = 200,
                     # val_check_interval = 500,
