@@ -13,3 +13,11 @@ or
 python -m pip install -r requirements.txt
 ```
 Also make sure to use python version 3.9 and create a virtual env to run the above scripts.
+
+# Criterion
+| Model Type                  | Task                                |
+|-----------------------------|-------------------------------------|
+| Transformer with time-based tokenization | Sequence and signal data analysis  |
+| Vision Transformer          | Image classification               |
+| U-Net                       | Image segmentation                 |
+| LightGBM                    | Tabular data analysis              |
