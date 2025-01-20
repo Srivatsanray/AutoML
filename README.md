@@ -25,4 +25,4 @@ Also make sure to use python version 3.9 and create a virtual env to run the abo
 ## Training and Testing
 The model is designed to take in metadata to configure the performance metrics and output task. Identify the directory path of your dataset and configure the path variables in th  ```main.py``` file.
 
-To test the model, test dataset is hosted on [kaggle]([url](https://kaggle.com/datasets/f006b553d95f1ddf163f59e2220dbf3b49db42dbfa76428883e42e0036c044e5)). You can download the entirety or specific to dataset description.
+To test the model, test dataset is hosted on [kaggle]([https://kaggle.com/datasets/f006b553d95f1ddf163f59e2220dbf3b49db42dbfa76428883e42e0036c044e5]). You can download the entirety or specific to dataset description.
